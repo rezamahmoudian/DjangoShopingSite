@@ -25,17 +25,17 @@ from .models import Category,Product
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.all()
+    products = Product.objects.filter(available=True)
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(available=True, category=category)
-        context = {
-            'categories': categories,
-            'category': category,
-            'products': products
-        }
-        return render(request, 'templates/shop/product/list.html', context)
+        products = products.filter(category=category)
+    context = {
+        'categories': categories,
+        'category': category,
+        'products': products
+    }
+    return render(request, '../templates/shop/products/list.html', context)
 
 
 def product_details(request, id, slug):
@@ -43,4 +43,4 @@ def product_details(request, id, slug):
     context = {
         'product': product
     }
-    return render(request, 'templates/shop/product/details.html', context)
+    return render(request, '../templates/shop/products/detail.html', context)

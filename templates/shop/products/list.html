@@ -1,0 +1,15 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    product list
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        <a href="{% url 'shop:product_detail' product.id product.slug %}">
+            {{ product.name }}4
+        </a>
+        <br>
+    {% endfor %}
+{% endblock%}
+
