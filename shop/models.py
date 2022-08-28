@@ -7,7 +7,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.CharField(max_length=200, db_index=True)
 
-    class Mete:
+    class Meta:
         ordering = ["name"]
         verbose_name = "category"
         verbose_name_plural = "categories"
