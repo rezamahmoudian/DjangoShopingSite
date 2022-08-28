@@ -9,7 +9,7 @@ class Category(models.Model):
 
     class Mete:
         ordering = ["name"]
-        verbose_name = "category "
+        verbose_name = "category"
         verbose_name_plural = "categories"
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey("Categoty", related_name="products", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", related_name="products", on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.CharField(max_length=200, db_index=True)
     #
