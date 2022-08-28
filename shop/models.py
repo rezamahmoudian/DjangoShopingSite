@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-class Categoty(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.CharField(max_length=200, db_index=True)
 
