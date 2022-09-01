@@ -22,11 +22,14 @@ class Cart:
             yield item
 
     # add to cart
-    def add(self, product, quantity):
+    def add(self, product, quantity, override=False):
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0, 'price': product.price}
-        self.cart[product_id]['quantity'] += quantity
+        if override:
+            self.cart[product_id]['quantity'] = quantity
+        else:
+            self.cart[product_id]['quantity'] += quantity
         self.save()
 
     def save(self):
