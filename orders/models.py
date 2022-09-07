@@ -10,7 +10,7 @@ class Order(models.Model):
     email = models.EmailField(max_length=225)
     address = models.TextField()
     postal_code = models.IntegerField()
-    city = models.CharField()
+    city = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
