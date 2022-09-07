@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    order create
+{% endblock %}
+
+{% block content %}
+    <h1>Checkout</h1>
+    <hr>
+    <ul>
+        {% for item in cart %}
+            <li>
+                {{ item.product.name }}  /  {{ item.product.quantity }}  X {{ item.product.price }}
+                <hr>
+                <span>{{ item.get_total_price }}</span>
+            </li>
+
+        {% endfor %}
+    </ul>
+    <hr>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="order now">
+    </form>
+{% endblock %}
+

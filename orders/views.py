@@ -15,7 +15,7 @@ def order_crate(request):
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'], quantity=item['quantity'], price=item['price'])
-            return render(request, 'templates/orders/order/create.html', {'order': order})
+            return render(request, 'templates/orders/order/created.html', {'order': order})
         else:
             form = OrderCreateForm()
         return render(request, 'templates/orders/order/create.html', {'form': form, 'cart': cart})
