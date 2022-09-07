@@ -7,7 +7,7 @@ from cart.cart import Cart
 # Create your views here.
 
 
-def order_crate(request):
+def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderCreateForm()
@@ -15,10 +15,12 @@ def order_crate(request):
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'], quantity=item['quantity'], price=item['price'])
-            return render(request, 'templates/orders/order/created.html', {'order': order})
-        else:
-            form = OrderCreateForm()
-        return render(request, 'templates/orders/order/create.html', {'form': form, 'cart': cart})
+            cart.clear()
+            return render(request, '../templates/orders/created.html', {'order': order})
+    else:
+        form = OrderCreateForm()
+
+    return render(request, '../templates/orders/create.html', {'form': form, 'cart': cart})
 
 
 

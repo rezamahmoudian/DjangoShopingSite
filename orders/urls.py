@@ -1,11 +1,10 @@
 from django.urls import path
-from .views import order_crate
+from .views import order_create
 
 app_name = 'orders'
 
 urlpatterns = [
-    path('create/', order_crate, name='order_create')
-
+    path('create/', order_create, name='order_create')
 ]
 
 
