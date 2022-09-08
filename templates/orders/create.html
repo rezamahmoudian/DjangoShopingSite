@@ -10,7 +10,7 @@
     <ul>
         {% for item in cart %}
             <li>
-                {{ item.product.name }}  /  {{ item }}  X {{ item.product.price }}
+                {{ item.product.name }}  /  {{ item.quantity }}  X {{ item.product.price }}
                 <hr>
                 <span>{{ item.get_total_price }}</span>
             </li>
@@ -21,7 +21,7 @@
     <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="order now">
+    <input type="submit"  value="order now">
     </form>
 {% endblock %}
 
