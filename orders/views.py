@@ -22,6 +22,3 @@ def order_create(request):
 
     return render(request, '../templates/orders/create.html', {'form': form, 'cart': cart})
 
-
-
-
