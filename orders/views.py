@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import OrderCreateForm
 from .models import Order
 from .models import OrderItem
 from cart.cart import Cart
 from .tasks import send_mail_func
+from django.urls import reverse
 # Create your views here.
 
 
@@ -16,8 +17,10 @@ def order_create(request):
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'], quantity=item['quantity'], price=item['price'])
             send_mail_func(order.id)
+            request.session['order_id'] = order.id
             cart.clear()
-            return render(request, '../templates/orders/created.html', {'order': order})
+            return redirect(reverse('zarinpal:request'))
+            # return render(request, '../templates/orders/created.html', {'order': order})
     else:
         form = OrderCreateForm()
 

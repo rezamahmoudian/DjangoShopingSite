@@ -4,6 +4,10 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 import requests
 import json
+from orders.models import Order
+from django.shortcuts import render, get_object_or_404
+
+
 
 MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 ZP_API_REQUEST = "https://api.zarinpal.com/pg/v4/payment/request.json"
@@ -14,16 +18,18 @@ description = "توضیحات مربوط به تراکنش را در این قس
 email = 'email@example.com'  # Optional
 mobile = '09123456789'  # Optional
 # Important: need to edit for realy server.
-CallbackURL = 'http://localhost:8000/verify/'
+CallbackURL = 'http://localhost:8000/zarinpal/verify/'
 
 
 def send_request(request):
+    order = get_object_or_404(Order, id=request.session.get('order_id'))
+    amount = order.get_total_price()
     req_data = {
         "merchant_id": MERCHANT,
         "amount": amount,
         "callback_url": CallbackURL,
         "description": description,
-        "metadata": {"mobile": mobile, "email": email}
+        "metadata": {"mobile": mobile, "email": order.email}
     }
     req_header = {"accept": "application/json",
                   "content-type": "application/json'"}

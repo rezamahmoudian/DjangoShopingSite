@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'zarinpal.apps.ZarinpalConfig',
 ]
 
 MIDDLEWARE = [
