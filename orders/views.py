@@ -16,9 +16,10 @@ def order_create(request):
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item['product'], quantity=item['quantity'], price=item['price'])
-            send_mail_func(order.id)
-            request.session['order_id'] = order.id
             cart.clear()
+            send_mail_func.delay(order.id)
+            request.session['order_id'] = order.id
+            #
             return redirect(reverse('zarinpal:request'))
             # return render(request, '../templates/orders/created.html', {'order': order})
     else:
