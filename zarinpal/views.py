@@ -77,9 +77,10 @@ def verify(request):
         else:
             e_code = req.json()['errors']['code']
             e_message = req.json()['errors']['message']
-            return render(request, '../templates/zarinpal/canceled.html', {'error_code': e_code, 'error_message': e_message})
+            return render(request, '../templates/zarinpal/failed.html', {'error_code': e_code, 'error_message': e_message})
             # e_code = req.json()['errors']['code']
             # e_message = req.json()['errors']['message']
             # return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
     else:
-        return HttpResponse('Transaction failed or canceled by user')
+        return render(request, '../templates/zarinpal/canceled.html')
+        # return HttpResponse('Transaction failed or canceled by user')
