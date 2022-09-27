@@ -32,4 +32,4 @@ def order_create(request):
 @staff_member_required()
 def order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    return render(request, '../templates/admin/orders/detail.html', {order: order})
+    return render(request, '../templates/admin/orders/detail.html', {'order': order})

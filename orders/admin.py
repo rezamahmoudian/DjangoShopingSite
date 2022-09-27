@@ -41,7 +41,7 @@ export_csv.short_description = 'Export to CSV'
 
 
 def order_detail(obj):
-    #args
+    #
     url = reverse("orders:admin_order_detail", args=[obj.id])
     return mark_safe(f'<a href="{url}"> View </a>')
 
