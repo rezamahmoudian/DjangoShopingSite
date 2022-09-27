@@ -16,7 +16,41 @@
 
 
 {% block content %}
-    order details
+    <h1> Order {{ order.id }}</h1>
+    <table>
+        <tr>
+            <th>Created</th>
+            <td>{{ order.created }}</td>
+        </tr>
+        <tr>
+            <th>Customer</th>
+            <td>{{ order.first_name }} {{ order.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ order.email }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ order.address }}</td>
+        </tr>
+        <tr>
+            <th>Total Price</th>
+            <td>{{ order.get_total_price }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+                {% if order.paid %}
+                    Paid
+                {% else %}
+                    Pending Payment
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <br>
+
 {% endblock %}
 
 
