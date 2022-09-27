@@ -51,6 +51,34 @@
     </table>
     <br>
 
+    <div class="module">
+        <h2>Item bought</h2>
+    </div>
+
+    <table style="width: 100%">
+    <thead>
+        <tr>
+            <th>PRODUCT</th>
+            <th>PRICE</th>
+            <th>QUANTITY</th>
+            <th>TOTAL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.get_cost }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">Total</td>
+            <td>{{ order.get_total_price }}</td>
+        </tr>
+    </tbody>
+    </table>
 {% endblock %}
 
 
