@@ -12,6 +12,7 @@ from weasyprint import HTML, CSS, pdf
 from django.shortcuts import HttpResponse
 from django.conf import settings
 
+
 # Create your views here.
 
 
@@ -45,8 +46,8 @@ def admin_order_detail(request, order_id):
 def admin_order_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     pdf_html = render_to_string('../templates/admin/orders/pdf.html', {"order": order})
-    pdf_file = HTML(string=pdf_html).write_pdf(stylesheets=[CSS(settings.STATIC_ROOT + 'css/pdf.css')])
 
-    response = HttpResponse(pdf, content_type='application/pdf')
+    response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=Order {order.id}.pdf'
+    HTML(string=pdf_html).write_pdf(response, stylesheets=[CSS(settings.STATIC_ROOT + 'css/pdf.css')])
     return response
