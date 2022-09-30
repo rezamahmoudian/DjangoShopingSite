@@ -49,5 +49,5 @@ def admin_order_pdf(request, order_id):
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=Order {order.id}.pdf'
-    HTML(string=pdf_html).write_pdf(response, stylesheets=[CSS(settings.STATIC_ROOT + 'css/pdf.css')])
+    HTML(string=pdf_html).write_pdf(response, stylesheets=[CSS(settings.STATIC_ROOT + 'css/order_pdf.css')])
     return response
