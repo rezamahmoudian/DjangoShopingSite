@@ -6,7 +6,7 @@ import requests
 import json
 from orders.models import Order
 from django.shortcuts import render, get_object_or_404
-
+from .tasks import send_order_pdf_mail
 
 
 MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
@@ -48,6 +48,7 @@ def verify(request):
     t_status = request.GET.get('Status')
     t_authority = request.GET['Authority']
     if request.GET.get('Status') == 'OK':
+        order = get_object_or_404(Order, id=request.session.get('order_id'))
         req_header = {"accept": "application/json",
                       "content-type": "application/json'"}
         req_data = {
@@ -59,6 +60,10 @@ def verify(request):
         if len(req.json()['errors']) == 0:
             t_status = req.json()['data']['code']
             if t_status == 100:
+                order.paid = True
+                order.save()
+
+                send_order_pdf_mail.delay(order.id)
                 return render(request, '../templates/zarinpal/success.html', {'id': req.json()['data']['ref_id']})
                 # return HttpResponse('Transaction success.\nRefID: ' + str(
                 #     req.json()['data']['ref_id']
