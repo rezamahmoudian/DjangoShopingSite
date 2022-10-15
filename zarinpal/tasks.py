@@ -22,3 +22,4 @@ def send_order_pdf_mail(order_id):
     weasyprint.HTML(html).write_pdf(out, stylesheets)
     email.attach(f'order_{order_id}', out.getvalue(), 'application/pdf')
     email.send()
+
