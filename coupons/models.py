@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.db.models.fields import BooleanField
 
 # Create your models here.
 
@@ -14,4 +13,3 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
-
