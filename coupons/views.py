@@ -1,16 +1,14 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-
 from .models import Coupon
 from .forms import CouponApplyForm
 from django.views.decorators.http import require_POST
-
 
 # Create your views here.
 
 
 @require_POST
-def coupon_apply(request):
+def coupon_apply_view(request):
     now = timezone.now()
     code = CouponApplyForm.cleaned_data['code']
     try:
