@@ -70,6 +70,30 @@
         <a href="{% url 'shop:product_list' %}" class="btn btn-primary">Continue Shopping</a>
         <a href="{% url 'orders:order_create' %}" class="btn btn-success">Checkout</a>
     </p>
+
+    <p>Apply Coupon Code:</p>
+    <form action="{% url 'coupons:coupon_apply' %}" method="post">
+    {{ coupon_apply_form.as_p }}
+    <button type="submit" class="btn btn-primary">Apply</button>
+    {% csrf_token %}
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {#    <p>Aooly Coupon Code:</p>#}
 {#    <form action="{% url 'coupons:apply' %}" method="POST">#}
 {#        {{form.as_p}}#}

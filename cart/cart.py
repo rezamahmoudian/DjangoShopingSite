@@ -3,6 +3,7 @@ from shop.models import Product
 from coupons.models import Coupon
 from decimal import Decimal
 
+
 #
 class Cart:
     def __init__(self, request):
@@ -53,7 +54,6 @@ class Cart:
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
         self.save()
-
 
     @property
     def coupon(self):

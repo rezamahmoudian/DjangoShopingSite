@@ -4,7 +4,6 @@ from .models import Coupon
 from .forms import CouponApplyForm
 from django.views.decorators.http import require_POST
 
-
 # Create your views here.
 
 
