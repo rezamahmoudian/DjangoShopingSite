@@ -54,7 +54,15 @@
                 <td colspan="4"></td>
                 <td>{{cart.get_total_price}}</td>
             </tr>
-            
+
+            {% if cart.coupon %}
+                <tr>
+                    <td>SubTotal with {{ cart.coupon.discount }}/td>
+                    <td colspan="4"></td>
+                    <td class="text-success">{{ cart.get_total_price_after_discount }}</td>
+                </tr>
+            {% endif %}
+
 {#            {% if cart.coupon %}#}
 {#                <tr>#}
 {#                    <td>Subtotal with {{cart.coupon.discount}}%</td>#}

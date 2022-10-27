@@ -9,6 +9,7 @@ class Cart:
     def __init__(self, request):
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
+        self.coupon_id = self.session.get('coupon_id')
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
@@ -26,7 +27,6 @@ class Cart:
     # add to cart
     def add(self, product, quantity, override=False):
         product_id = str(product.id)
-        self.coupon_id = self.session.get('coupon_id')
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0, 'price': product.price}
         if override:
@@ -59,7 +59,8 @@ class Cart:
     def coupon(self):
         if self.coupon_id:
             try:
-                return Coupon.objects.get(id=self.coupon_id)
+                coupon = Coupon.objects.get(id=self.coupon_id)
+                return coupon
             except Coupon.DoesNotExist:
                 pass
         return None
