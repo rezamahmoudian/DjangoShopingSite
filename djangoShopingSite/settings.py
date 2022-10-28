@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,7 +125,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # my adiitions
 
 MEDIA_URL = '/media/'
@@ -136,6 +136,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-
 GTK_FOLDER = r'C:\Program Files\GTK3-Runtime Win64\bin'
 os.environ['PATH'] = GTK_FOLDER + os.pathsep + os.environ.get('PATH', '')
+
+# languages
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Farsi')
+)
+
+# locale dir
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)
