@@ -1,23 +1,25 @@
 from django.db import models
 from shop.models import Product
+from django.utils.translation import gettext as _
 
 
 # Create your models here.
 
 class Order(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=225)
-    address = models.TextField()
-    postal_code = models.IntegerField()
-    city = models.CharField(max_length=250)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
+    first_name = models.CharField(_('first name'), max_length=100)
+    last_name = models.CharField(_('last name'), max_length=100)
+    email = models.EmailField(_('email'), max_length=225)
+    address = models.TextField(_('address'))
+    postal_code = models.IntegerField(_('postal code'))
+    city = models.CharField(_('city'), max_length=250)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    updated = models.DateTimeField(_('updated'), auto_now=True)
+    paid = models.BooleanField(_('paid'), default=False)
 
     class Meta:
         ordering = ('-created',)
-#
+
+    #
 
     def __str__(self):
         return f'Order {self.id}'
