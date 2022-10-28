@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'zarinpal.apps.ZarinpalConfig',
     'coupons.apps.CouponsConfig',
+    'rosetta',
 ]
 
 MIDDLEWARE = [
