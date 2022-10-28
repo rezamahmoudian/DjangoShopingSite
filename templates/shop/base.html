@@ -18,6 +18,21 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="{% url 'shop:product_list' %}">{% trans "My Shop" %}</a>
 
+    <!-- select language -->
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+    {% get_language_info_list for LANGUAGES as languages %}
+
+    <div>
+        <P>{% trans 'language' %}</P>
+        <ul>
+            {% for language in languages %}
+                <li>
+                    <a href="/{{ language.code }}/">{{ language.name_local }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
