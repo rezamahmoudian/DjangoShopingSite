@@ -24,22 +24,24 @@ class Category(TranslatableModel):
         return reverse("shop:product_list_category", args=[self.slug])
 
 
-class Product(models.Model):
+class Product(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=200, db_index=True),
+        slug=models.CharField(max_length=200, db_index=True),
+        description=models.TextField(blank=True),
+        price=models.PositiveIntegerField()
+    )
     category = models.ForeignKey("Category", related_name="products", on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, db_index=True)
-    slug = models.CharField(max_length=200, db_index=True)
     #
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
-    description = models.TextField(blank=True)
-    price = models.PositiveIntegerField()
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ["name"]
+    # class Meta:
+        # ordering = ["name"]
         #
-        index_together = (('id', 'slug'),)
+        # index_together = (('id', 'slug'),)
 
     def __str__(self):
         return self.name
