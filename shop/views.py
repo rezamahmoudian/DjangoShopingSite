@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.list import ListView
 from .models import Category, Product
 from cart.forms import CartAddProductForm
+from django.conf import settings
 
 # Create your views here.
 
@@ -29,7 +30,8 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(available=True)
 
     if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
+        language = request.LANGUAGE_CODE
+        category = get_object_or_404(Category, translations__language_code=language, translations__slug=category_slug)
         products = products.filter(category=category)
     context = {
         'categories': categories,
@@ -40,7 +42,8 @@ def product_list(request, category_slug=None):
 
 
 def product_details(request, id, slug):
-    product = get_object_or_404(Product, id=id, available=True, slug=slug)
+    language = request.LANGUAGE_CODE
+    product = get_object_or_404(Product, id=id, available=True, translations__language_code=language, translations__slug=slug)
     form = CartAddProductForm
     context = {
         'product': product,
