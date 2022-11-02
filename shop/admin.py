@@ -1,12 +1,12 @@
 from django.contrib import admin
 from .models import Category, Product
-
+from parler.admin import TranslatableAdmin
 
 # Register your models here.
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslatableAdmin):
     list_display = ('name', 'slug')
     # auto fill slug with name
     # prepopulated_fields = {'slug': ('name',)}
@@ -16,7 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslatableAdmin):
     list_display = ('name', 'slug', 'description', 'price', 'available', 'updated')
     list_filter = ('available', 'updated', 'created')
     list_editable = ('available',)
